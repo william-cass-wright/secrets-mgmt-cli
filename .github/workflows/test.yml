@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  label-test:
     if: ${{ github.event.label.name == 'test' }}
     runs-on: ubuntu-latest
     strategy:
@@ -33,15 +33,3 @@ jobs:
     - name: Run tests
       run: |
         pytest
-  lint:
-    if: ${{ github.event.label.name == 'test' }}
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2  
-    - name: Python Linter
-      uses: sunnysid3up/python-linter@master
-      with:
-        source: "secrets_mgmt_cli"
-        mypy-options: "--ignore-missing-imports --show-error-codes"
-        isort-options: "-w 100"
-        black-options: "-l 120"
