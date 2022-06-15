@@ -35,6 +35,7 @@ def first_command(example, option):
 
 @cli.command()
 def ls():
+    "list secrets in AWS Secrets Manager"
     resp = aws.get_secrets_list()
     for secret in resp.get("SecretList"):
         click.echo(f"\n-- {secret.get('Name')} --")
@@ -48,6 +49,7 @@ def ls():
 @click.option("-n", "--secret-name", "secret_name", required=True)
 @click.option("-d", "--description", "description", required=False, default="string description")
 def create(secret_string, secret_name, description):
+    "create new secret"
     # create_secret(self, secret_string, secret_name, description="string description")
     click.echo("create secret method --> needs to be implemented")
 
@@ -56,7 +58,13 @@ def create(secret_string, secret_name, description):
 @cli.command()
 @click.option("-n", "--secret-name", "secret_name", required=True)
 def read(description):
+    "read contents of secret, metadata and secret_string"
     click.echo("read secret method --> needs to be implemented")
+    # get and display metadata
+    value = click.prompt("display secret string? [Y/n]", type=str)
+    if value.lower() == "y":
+        # get and display secret string
+        pass
 
 
 # update
@@ -65,6 +73,7 @@ def read(description):
 @click.option("-n", "--secret-name", "secret_name", required=True)
 @click.option("-d", "--description", "description", required=False, default="string description")
 def update(secret_string, secret_name, description):
+    "change the contents of an existing secert"
     click.echo("update secret method --> needs to be implemented")
 
 
@@ -72,6 +81,7 @@ def update(secret_string, secret_name, description):
 @cli.command()
 @click.option("-n", "--secret-name", "secret_name", required=True)
 def delete(description):
+    "remove or archive a secret from AWS Secret Manager"
     click.echo("delete secret method --> needs to be implemented")
 
 
