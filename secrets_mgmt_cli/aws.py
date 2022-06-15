@@ -41,7 +41,7 @@ from botocore.exceptions import ClientError
 
 def get_default_region() -> str:
     config_file_path = pathlib.Path.home() / ".aws" / "config"
-    if os.path.isfile(self.config_file_path):
+    if os.path.isfile(config_file_path):
         config = configparser.ConfigParser()
         config.read(config_file_path)
         return config["default"]["region"]
