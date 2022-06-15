@@ -1,6 +1,5 @@
 name: Test
 
-# on: [push, pull_request]
 on:
   pull_request:
     types: [ labeled ]
@@ -37,9 +36,6 @@ jobs:
   lint:
     if: ${{ github.event.label.name == 'test' }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v2  
     - name: Python Linter
@@ -50,5 +46,4 @@ jobs:
         pylint-options: "--rcfile=setup.cfg"
         isort-options: "-w 100"
         black-options: "-l 120"
-        # django: true
 
