@@ -17,6 +17,7 @@ jobs:
       uses: sunnysid3up/python-linter@master
       with:
         source: "secrets_mgmt_cli"
+        strict: "low"
         mypy-options: "--ignore-missing-imports --show-error-codes"
         isort-options: "-w 100"
         black-options: "-l 120"

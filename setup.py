@@ -29,9 +29,12 @@ setup(
     packages=["secrets_mgmt_cli"],
     entry_points="""
         [console_scripts]
-        secrets-mgmt-cli=secrets_mgmt_cli.cli:cli
+        smgmt=secrets_mgmt_cli.cli:cli
     """,
-    install_requires=["click"],
+    install_requires=[
+        "click", 
+        "boto3>=1.24.9"
+        ],
     extras_require={
         "test": ["pytest"]
     },
