@@ -34,4 +34,21 @@ jobs:
     - name: Run tests
       run: |
         pytest
+  lint:
+    if: ${{ github.event.label.name == 'test' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v2  
+    - name: Python Linter
+      uses: sunnysid3up/python-linter@master
+      with:
+        source: "secrets_mgmt_cli"
+        mypy-options: "--ignore-missing-imports --show-error-codes"
+        pylint-options: "--rcfile=setup.cfg"
+        isort-options: "-w 100"
+        black-options: "-l 120"
+        # django: true
 
