@@ -40,10 +40,14 @@ from botocore.exceptions import ClientError
 
 
 def get_default_region() -> str:
-    p = pathlib.Path.home() / ".aws" / "config"
-    config = configparser.ConfigParser()
-    config.read(p)
-    return config["default"]["region"]
+    config_file_path = pathlib.Path.home() / ".aws" / "config"
+    if os.path.isfile(self.config_file_path):
+        config = configparser.ConfigParser()
+        config.read(config_file_path)
+        return config["default"]["region"]
+    else:
+        region = "us-west-1"
+        return region
 
 
 class AwsSecretMgmt:
@@ -99,6 +103,5 @@ class AwsSecretMgmt:
             return response
         except ClientError as e:
             return e
-
 
 aws = AwsSecretMgmt()
