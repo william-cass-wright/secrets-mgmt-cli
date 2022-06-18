@@ -32,7 +32,7 @@ def ls():
     resp = aws.get_secrets_list()
     for secret in resp.get("SecretList"):
         click.echo(f"\n-- {secret.get('Name')} --")
-        echo_dict(input_dict)
+        echo_dict(secret)
 
 
 @cli.command()
@@ -79,7 +79,7 @@ def search(key_word):
     for secret in resp.get("SecretList"):
         if key_word in secret.get("Name"):
             click.echo(f"\n-- {secret.get('Name')} --")
-            echo_dict(input_dict)
+            echo_dict(secret)
 
 
 cli.add_command(ls)
