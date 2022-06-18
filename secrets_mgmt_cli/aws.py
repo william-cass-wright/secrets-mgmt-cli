@@ -30,7 +30,7 @@ class AwsSecretMgmt:
         :param client: A Boto3 Secrets Manager client.
         """
         session = boto3.session.Session()
-        self.client = session.client(service_name="secretsmanager")
+        self.client = session.client(service_name="secretsmanager", region_name=get_default_region())
         self.name = None
 
     def _clear(self):
