@@ -5,3 +5,6 @@ project_notes.md
 - create project config file from secret (`~/.config/project_name/config`) using `ConfigHandler`
 - write new secret from config file
 - overwrite/upversion a secret (designate latest?) --> "archive" secrets by renaming them
+
+
+[secretsmanager_basics.py](https://docs.aws.amazon.com/code-samples/latest/catalog/python-secretsmanager-secretsmanager_basics.py.html)
