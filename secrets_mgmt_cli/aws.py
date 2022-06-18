@@ -1,7 +1,3 @@
-"""
-docstring
-"""
-
 import os
 import json
 import base64
@@ -272,6 +268,9 @@ class AwsSecretMgmt:
         except ClientError:
             logger.exception("Couldn't list secrets.")
             raise
+
+    def get_secrets_list(self):
+        return self.client.list_secrets()
 
 
 aws = AwsSecretMgmt()
