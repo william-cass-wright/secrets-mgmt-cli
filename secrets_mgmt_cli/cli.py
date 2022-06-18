@@ -35,16 +35,14 @@ def ls():
         echo_dict(input_dict)
 
 
-# create
 @cli.command()
 @click.option("-s", "--secret-string", "secret_string", help="serialized json", required=True)
 @click.option("-n", "--secret-name", "secret_name", required=True)
 def create(secret_string, secret_name):
     "create new secret"
-    aws.create(name=secret_name,secret_value=secret_string)
+    aws.create(name=secret_name, secret_value=secret_string)
 
 
-# read
 @cli.command()
 @click.option("-n", "--secret-name", "secret_name", required=True)
 def read(secret_name):
@@ -56,18 +54,15 @@ def read(secret_name):
         click.echo(aws.get_value())
 
 
-# update
 @cli.command()
 @click.option("-s", "--secret-string", "secret_string", help="serialized json", required=True)
 @click.option("-n", "--secret-name", "secret_name", required=True)
-# @click.option("-d", "--description", "description", required=False, default="string description")
 def update(secret_string, secret_name):  # , description):
     "change or add the contents of an existing secert"
     resp = aws.put_value(secret_value=secret_string, name=secret_name)
     click.echo(resp)
 
 
-# delete
 @cli.command()
 @click.option("-n", "--secret-name", "secret_name", required=True)
 def delete(secret_name):
@@ -76,9 +71,20 @@ def delete(secret_name):
     click.echo(resp)
 
 
+@cli.command()
+@click.option("-k", "--key-word", "key_word", required=True)
+def search(key_word):
+    "list secrets in AWS Secrets Manager with regex match"
+    resp = aws.get_secrets_list()
+    for secret in resp.get("SecretList"):
+        if key_word in secret.get("Name"):
+            click.echo(f"\n-- {secret.get('Name')} --")
+            echo_dict(input_dict)
+
+
 cli.add_command(ls)
 cli.add_command(create)
 cli.add_command(read)
 cli.add_command(update)
 cli.add_command(delete)
-# cli.add_command(search)
+cli.add_command(search)

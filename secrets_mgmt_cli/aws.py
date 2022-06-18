@@ -233,7 +233,11 @@ class AwsSecretMgmt:
         else:
             return response
 
-    def delete(self, without_recovery, name=None,):
+    def delete(
+        self,
+        without_recovery,
+        name=None,
+    ):
         """
         Deletes the secret.
 
