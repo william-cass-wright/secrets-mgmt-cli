@@ -7,6 +7,7 @@
 
 - A simple CLI for managing secrets in AWS Secrets Manager
 - [PyPI project](https://pypi.org/project/secrets-mgmt-cli/)
+- Based on cookiecutter template [simonw/click-app](https://github.com/simonw/click-app)
 
 ## Installation
 Install this tool using `pip`:

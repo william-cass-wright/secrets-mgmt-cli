@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-VERSION = "0.4.1"
+VERSION = "0.4.2"
 
 
 def get_long_description():
@@ -33,7 +33,7 @@ setup(
     """,
     install_requires=[
         "click", 
-        "boto3>=1.24.9"
+        "boto3"
         ],
     extras_require={
         "test": ["pytest"]
