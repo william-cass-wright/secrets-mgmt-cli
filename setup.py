@@ -31,12 +31,7 @@ setup(
         [console_scripts]
         smgmt=secrets_mgmt_cli.cli:cli
     """,
-    install_requires=[
-        "click", 
-        "boto3"
-        ],
-    extras_require={
-        "test": ["pytest"]
-    },
+    install_requires=["click", "boto3"],
+    extras_require={"test": ["pytest"]},
     python_requires=">=3.7",
 )
