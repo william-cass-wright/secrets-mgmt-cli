@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-VERSION = "0.4.2"
+VERSION = "0.4.3"
 
 
 def get_long_description():
@@ -31,12 +31,7 @@ setup(
         [console_scripts]
         smgmt=secrets_mgmt_cli.cli:cli
     """,
-    install_requires=[
-        "click", 
-        "boto3"
-        ],
-    extras_require={
-        "test": ["pytest"]
-    },
+    install_requires=["click", "boto3"],
+    extras_require={"test": ["pytest"]},
     python_requires=">=3.7",
 )

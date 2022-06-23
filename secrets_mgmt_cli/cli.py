@@ -1,9 +1,11 @@
+import os
 import json
 import datetime
 
 import click
 
 from .aws import aws
+from .config import ConfigHandler, config_handler
 
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -27,12 +29,16 @@ def cli():
 
 
 @cli.command()
-def ls():
+@click.option("--config", is_flag=True)
+def ls(config):
     "list secrets in AWS Secrets Manager"
-    resp = aws.get_secrets_list()
-    for secret in resp.get("SecretList"):
-        click.echo(f"\n-- {secret.get('Name')} --")
-        echo_dict(secret)
+    if config:
+        config_handler.list_config_dirs()
+    else:
+        resp = aws.get_secrets_list()
+        for secret in resp.get("SecretList"):
+            click.echo(f"\n-- {secret.get('Name')} --")
+            echo_dict(secret)
 
 
 @cli.command()
@@ -82,9 +88,23 @@ def search(key_word):
             echo_dict(secret)
 
 
+@cli.command()
+@click.option("-n", "--secret-name", "secret_name", required=False, default=None)
+@click.option("-p", "--project-name", "project_name", required=True)
+def transfer(secret_name, project_name):
+    config = ConfigHandler(project_name)
+    if secret_name is None:
+        secrets_prefix = "projects/dev"
+        secret_name = os.path.join(secrets_prefix, project_name)
+    secret = aws.get_secret(secret_name=secret_name)
+    config.write_config_file_from_dict(config_dict=secret)
+    return config.print_configs()
+
+
 cli.add_command(ls)
 cli.add_command(create)
 cli.add_command(read)
 cli.add_command(update)
 cli.add_command(delete)
 cli.add_command(search)
+cli.add_command(transfer)
