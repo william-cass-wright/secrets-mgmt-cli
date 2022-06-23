@@ -40,3 +40,8 @@ To run the tests:
 ```bash
 pytest
 ```
+
+## References
+- heavily based on [secretsmanager_basics.py][1]
+
+[1]: https://docs.aws.amazon.com/code-samples/latest/catalog/python-secretsmanager-secretsmanager_basics.py.html

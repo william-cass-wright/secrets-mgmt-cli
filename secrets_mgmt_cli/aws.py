@@ -1,14 +1,15 @@
 import os
 import json
+import time
 import base64
 import pathlib
+import logging
 import configparser
 
 import boto3
 from botocore.exceptions import ClientError
 
-import time
-import logging
+logger = logging.getLogger(__name__)
 
 
 def get_default_region() -> str:
