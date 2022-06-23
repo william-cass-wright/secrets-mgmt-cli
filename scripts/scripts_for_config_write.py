@@ -29,18 +29,6 @@ def write_secret_to_local_config(project_name):
     return config.print_configs()
 
 
-for project_name in projects:
-    write_secret_to_local_config(project_name)
-
-
-def write_secret_to_local_config(project_name):
-    config = ConfigHandler(project_name)
-    secrets_prefix = "projects/dev"
-    secret = aws.get_secret(os.path.join(secrets_prefix, project_name))
-    config.write_config_file_from_dict(config_dict=secret)
-    return config.print_configs()
-
-
 # for project_name in projects:
 #     write_secret_to_local_config(project_name)
 
