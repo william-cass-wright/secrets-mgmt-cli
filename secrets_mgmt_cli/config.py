@@ -91,5 +91,13 @@ class ConfigHandler:
         val = str(val)
         print(key, (n - int(len(key))) * ".", val)
 
+    def get_configs(self):
+        if os.path.isfile(self.config_file_path):
+            return self.config.defaults()
+        else:
+            return None
+
+    def check_config_exists(self):
+        return os.path.isfile(self.config_file_path)
 
 config_handler = ConfigHandler()
